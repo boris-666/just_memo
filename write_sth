@@ -1,1 +1,17 @@
 
+==DNSSEC===
+
+KSK,ZSK是每个Zone自己生成的。
+DS    # 子域把自己的KSK公钥做哈希后,把hash值发送给父域,父域再对他签名，然后把它作为一个DS记录发布出来.子域本身没有这条记录。
+KSK   # 私钥签名 ZSK的公钥 得到ZSK类型的RRSIG。 KSK的公钥存在于KSK类型的DNSKEY中,所以DNSKEY是一种记录
+ZSK   # 私钥签名 普通RRSet 得到该类型的RRSIG。 ZSK的公钥存在于ZSK类型的DNSKEY中,所以DNSKEY是一种记录
+RRSet # 同类型的资源记录集合
+RRSIG # ZSK ----hash(RRSet)----> RRSIG。RRSIG是有类型的,如A，AAAA，MX等，他是资源记录的一种。
+
+
+
+https://techblog.asia-quest.jp/202312/understanding-the-basics-of-dnssec-and-checking-actual-records
+
+https://nic.ad.jp/iw2010/FCU24/iw2010-DNSSEC-06.pdf
+https://www.nic.ad.jp/ja/newsletter/No43/0800.html
+
